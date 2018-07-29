@@ -1,0 +1,25 @@
+Emos1 setup procedure
+
+1. Databases: DemoESR.bacpac & Emos1.bacpac
+- Emos1 is databases of all Emos1 clients (with each client's database connection string)
+- DemoESR is Demo client database, containing all client data: staff, volunteers, equipment, ...
+
+2. Existing EMOS1 Project template source code: emos2.0-develop.zip
+- Emos1 application is two layer application: MVC + API
+- MVC must be set under demo sub-domain: for instance http://demo.emos2.local
+- MVC must point to API: for example  <add key="apiURL" value="http://api.emos2.local/" />
+- API must have set connectionStrings: Emos1Context and ESRContext (depends how you setup databases)
+
+3. Front-end side is in development.
+- Pages developed until now are at http://nikatec.com/emos2
+- NikaTec will provide html + css for each page
+
+4. Could you provide time estimate you will need for developing a page: http://nikatec.com/emos2/event/events.html
+- Events objects are located in Event table in DemoESR database
+- Database schema will never be changed by candidates. It will be handled by NikaTec
+- Candidates are expected to develop all needed entities based on project template. For instance:
+- MVC: Events controller, view and models
+- API: Events controller and models
+- Business login: base service (CRUD) and custom service if needed  (repository is generic)
+- Project template use IoC (Autofac), DI and generic repository pattern
+
