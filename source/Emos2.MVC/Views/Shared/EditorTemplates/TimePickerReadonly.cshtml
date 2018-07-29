@@ -1,0 +1,10 @@
+﻿@model TimeSpan?
+
+<div class="form-group">
+    @Html.LabelFor(model => model, new { @class = "col-sm-4 control-label" })
+    <div class="col-sm-7">
+        @Html.TextBoxFor(model => model, Model.HasValue ? Model.Value.ToString(@"hh\:mm") : string.Empty, new { @class = "form-control date", @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+    </div>
+</div>
+

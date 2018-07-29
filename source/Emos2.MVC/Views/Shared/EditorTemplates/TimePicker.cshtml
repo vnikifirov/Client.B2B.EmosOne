@@ -1,0 +1,12 @@
+﻿@model TimeSpan?
+
+<div class="form-group">
+    @Html.LabelFor(model => model, new { @class = "col-sm-4 control-label" })
+    <div class="col-sm-7">
+        @Html.TextBoxFor(model => model, Model.HasValue ? Model.Value.ToString(@"hh\:mm") : string.Empty, new { @class = "form-control date" })
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+    </div>
+    <script type="text/javascript">
+        initTimePicker('@Html.IdForModel()');
+    </script>
+</div>

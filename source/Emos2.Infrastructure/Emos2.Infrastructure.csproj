@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2EC3C62B-3EDB-4C2D-B283-E8DB6EBA9D00}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Emos2.Infrastructure</RootNamespace>
+    <AssemblyName>Emos2.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Contexts\IContextEmos1.cs" />
+    <Compile Include="Contexts\IContextESR.cs" />
+    <Compile Include="Declares\PermissionEnum.cs" />
+    <Compile Include="Entities\Database.Emos1\Client.cs" />
+    <Compile Include="Entities\Database.Emos1\ClientApplication.cs" />
+    <Compile Include="Entities\Database.Emos1\ClientSetting.cs" />
+    <Compile Include="Entities\Database.Emos1\EmailTemplateType.cs" />
+    <Compile Include="Entities\Database.Emos1\EMOSUser.cs" />
+    <Compile Include="Entities\Database.Emos1\Placeholder.cs" />
+    <Compile Include="Entities\Database.Emos1\roadkill_pagecontent.cs" />
+    <Compile Include="Entities\Database.Emos1\roadkill_pages.cs" />
+    <Compile Include="Entities\Database.Emos1\roadkill_siteconfiguration.cs" />
+    <Compile Include="Entities\Database.Emos1\roadkill_users.cs" />
+    <Compile Include="Entities\Database.Emos1\Setting.cs" />
+    <Compile Include="Entities\Database.Emos1\SupportTicket.cs" />
+    <Compile Include="Entities\Database.Emos1\SupportTicketStatu.cs" />
+    <Compile Include="Entities\Database\AirfareRequest.cs" />
+    <Compile Include="Entities\Database\AirfareRequestStatu.cs" />
+    <Compile Include="Entities\Database\Airport.cs" />
+    <Compile Include="Entities\Database\Answer.cs" />
+    <Compile Include="Entities\Database\BannerNotification.cs" />
+    <Compile Include="Entities\Database\Bed.cs" />
+    <Compile Include="Entities\Database\Building.cs" />
+    <Compile Include="Entities\Database\BusinessUnit.cs" />
+    <Compile Include="Entities\Database\Category.cs" />
+    <Compile Include="Entities\Database\CEMUser.cs" />
+    <Compile Include="Entities\Database\Charity.cs" />
+    <Compile Include="Entities\Database\CheckInLocation.cs" />
+    <Compile Include="Entities\Database\ChiefComplaint.cs" />
+    <Compile Include="Entities\Database\Contact.cs" />
+    <Compile Include="Entities\Database\Country.cs" />
+    <Compile Include="Entities\Database\Diagnose.cs" />
+    <Compile Include="Entities\Database\Doctor.cs" />
+    <Compile Include="Entities\Database\Email.cs" />
+    <Compile Include="Entities\Database\EmailServiceAccount.cs" />
+    <Compile Include="Entities\Database\EmailTemplate.cs" />
+    <Compile Include="Entities\Database\EmailTemplateAttachment.cs" />
+    <Compile Include="Entities\Database\EmailTemplateOrganizationalUnit.cs" />
+    <Compile Include="Entities\Database\Event.cs" />
+    <Compile Include="Entities\Database\EventEmailServiceAccount.cs" />
+    <Compile Include="Entities\Database\EventSetting.cs" />
+    <Compile Include="Entities\Database\EventSetupCheckList.cs" />
+    <Compile Include="Entities\Database\Exibitor.cs" />
+    <Compile Include="Entities\Database\FastTrackComplaint.cs" />
+    <Compile Include="Entities\Database\FastTrackDischarge.cs" />
+    <Compile Include="Entities\Database\FastTrackItem.cs" />
+    <Compile Include="Entities\Database\FastTrackVisit.cs" />
+    <Compile Include="Entities\Database\GeneralLedger.cs" />
+    <Compile Include="Entities\Database\Hospital.cs" />
+    <Compile Include="Entities\Database\Hotel.cs" />
+    <Compile Include="Entities\Database\HotelRequest.cs" />
+    <Compile Include="Entities\Database\HotelRequestStatu.cs" />
+    <Compile Include="Entities\Database\ImportLog.cs" />
+    <Compile Include="Entities\Database\Item.cs" />
+    <Compile Include="Entities\Database\ItemAssignment.cs" />
+    <Compile Include="Entities\Database\ItemBackup.cs" />
+    <Compile Include="Entities\Database\ItemCheckInOut.cs" />
+    <Compile Include="Entities\Database\ItemCheckInOutStatu.cs" />
+    <Compile Include="Entities\Database\ItemDistributionType.cs" />
+    <Compile Include="Entities\Database\ItemExtSignage.cs" />
+    <Compile Include="Entities\Database\ItemImage.cs" />
+    <Compile Include="Entities\Database\ItemLocation.cs" />
+    <Compile Include="Entities\Database\ItemLocationLog.cs" />
+    <Compile Include="Entities\Database\ItemRequest.cs" />
+    <Compile Include="Entities\Database\ItemRequestStatu.cs" />
+    <Compile Include="Entities\Database\ItemSet.cs" />
+    <Compile Include="Entities\Database\ItemType.cs" />
+    <Compile Include="Entities\Database\ItemUniqueProperty.cs" />
+    <Compile Include="Entities\Database\ItemVendor.cs" />
+    <Compile Include="Entities\Database\Job.cs" />
+    <Compile Include="Entities\Database\JobItemAssignment.cs" />
+    <Compile Include="Entities\Database\JobRadioChannel.cs" />
+    <Compile Include="Entities\Database\JobShift.cs" />
+    <Compile Include="Entities\Database\Language.cs" />
+    <Compile Include="Entities\Database\Location.cs" />
+    <Compile Include="Entities\Database\LocationAssignment.cs" />
+    <Compile Include="Entities\Database\Log.cs" />
+    <Compile Include="Entities\Database\Meal.cs" />
+    <Compile Include="Entities\Database\MealTime.cs" />
+    <Compile Include="Entities\Database\MedicalLicense.cs" />
+    <Compile Include="Entities\Database\MedicalServiceGroup.cs" />
+    <Compile Include="Entities\Database\MedicalServiceVolunteer.cs" />
+    <Compile Include="Entities\Database\MedicalTent.cs" />
+    <Compile Include="Entities\Database\MedicalTentDiagnose.cs" />
+    <Compile Include="Entities\Database\MedicalTentMandatoryField.cs" />
+    <Compile Include="Entities\Database\MedicalTentSection.cs" />
+    <Compile Include="Entities\Database\MedicalTentTreatment.cs" />
+    <Compile Include="Entities\Database\MedicalTentType.cs" />
+    <Compile Include="Entities\Database\MedicalTentTypeStatu.cs" />
+    <Compile Include="Entities\Database\Meeting.cs" />
+    <Compile Include="Entities\Database\MessageServiceAccount.cs" />
+    <Compile Include="Entities\Database\MobileDevice.cs" />
+    <Compile Include="Entities\Database\Notification.cs" />
+    <Compile Include="Entities\Database\OrganizationUnit.cs" />
+    <Compile Include="Entities\Database\OrganizationUnitType.cs" />
+    <Compile Include="Entities\Database\Participant.cs" />
+    <Compile Include="Entities\Database\ParticipantCheckIn.cs" />
+    <Compile Include="Entities\Database\ParticipantMedicalInfo.cs" />
+    <Compile Include="Entities\Database\Patient.cs" />
+    <Compile Include="Entities\Database\PermissionRole.cs" />
+    <Compile Include="Entities\Database\PermissionRoleSystemAction.cs" />
+    <Compile Include="Entities\Database\Question.cs" />
+    <Compile Include="Entities\Database\QuestionOption.cs" />
+    <Compile Include="Entities\Database\Race.cs" />
+    <Compile Include="Entities\Database\RadioChannel.cs" />
+    <Compile Include="Entities\Database\SecurityIssue.cs" />
+    <Compile Include="Entities\Database\SecurityIssueStatu.cs" />
+    <Compile Include="Entities\Database\SecurityZone.cs" />
+    <Compile Include="Entities\Database\SendAllMessageTo.cs" />
+    <Compile Include="Entities\Database\ShoeAge.cs" />
+    <Compile Include="Entities\Database\ShoeBrand.cs" />
+    <Compile Include="Entities\Database\ShoeModel.cs" />
+    <Compile Include="Entities\Database\Size.cs" />
+    <Compile Include="Entities\Database\SizeType.cs" />
+    <Compile Include="Entities\Database\SkillCertification.cs" />
+    <Compile Include="Entities\Database\Sponsor.cs" />
+    <Compile Include="Entities\Database\SupportTicket.cs" />
+    <Compile Include="Entities\Database\SupportTicketStatu.cs" />
+    <Compile Include="Entities\Database\Survey.cs" />
+    <Compile Include="Entities\Database\SurveyDistribution.cs" />
+    <Compile Include="Entities\Database\TextMessage.cs" />
+    <Compile Include="Entities\Database\TextMessageTemplate.cs" />
+    <Compile Include="Entities\Database\TimelineActivity.cs" />
+    <Compile Include="Entities\Database\TimelineActivityStatu.cs" />
+    <Compile Include="Entities\Database\Translator.cs" />
+    <Compile Include="Entities\Database\TransportBu.cs" />
+    <Compile Include="Entities\Database\TransportBusPaxUpdate.cs" />
+    <Compile Include="Entities\Database\TransportBusRequest.cs" />
+    <Compile Include="Entities\Database\TransportBusStatu.cs" />
+    <Compile Include="Entities\Database\TransportCoral.cs" />
+    <Compile Include="Entities\Database\TransportDepotLocation.cs" />
+    <Compile Include="Entities\Database\TransportServiceCenter.cs" />
+    <Compile Include="Entities\Database\TransportSite.cs" />
+    <Compile Include="Entities\Database\TransportSiteCoordinator.cs" />
+    <Compile Include="Entities\Database\Treatment.cs" />
+    <Compile Include="Entities\Database\UniformType.cs" />
+    <Compile Include="Entities\Database\UnitOfMeasure.cs" />
+    <Compile Include="Entities\Database\UnitOfMeasurePackageCount.cs" />
+    <Compile Include="Entities\Database\UnitOfMeasurePackageVolume.cs" />
+    <Compile Include="Entities\Database\UserBadge.cs" />
+    <Compile Include="Entities\Database\UserCategory.cs" />
+    <Compile Include="Entities\Database\UserCertification.cs" />
+    <Compile Include="Entities\Database\UserCRUD.cs" />
+    <Compile Include="Entities\Database\UserEventCheckIn.cs" />
+    <Compile Include="Entities\Database\UserFinancial.cs" />
+    <Compile Include="Entities\Database\UserGuestInfo.cs" />
+    <Compile Include="Entities\Database\UserJob.cs" />
+    <Compile Include="Entities\Database\UserLocation.cs" />
+    <Compile Include="Entities\Database\UserLogin.cs" />
+    <Compile Include="Entities\Database\UserMeeting.cs" />
+    <Compile Include="Entities\Database\UserOrganizationUnit.cs" />
+    <Compile Include="Entities\Database\UserPermissionRole.cs" />
+    <Compile Include="Entities\Database\UserRadioChannel.cs" />
+    <Compile Include="Entities\Database\UserSize.cs" />
+    <Compile Include="Entities\Database\UserSystemAction.cs" />
+    <Compile Include="Entities\Database\UserVehicleOnEventDay.cs" />
+    <Compile Include="Entities\Database\UserVolunteerJob.cs" />
+    <Compile Include="Entities\Database\Vehicle.cs" />
+    <Compile Include="Entities\Database\VehicleCategory.cs" />
+    <Compile Include="Entities\Database\VehicleCEMUser.cs" />
+    <Compile Include="Entities\Database\VehicleGroup.cs" />
+    <Compile Include="Entities\Database\VehicleLocation.cs" />
+    <Compile Include="Entities\Database\VehicleLocationHistory.cs" />
+    <Compile Include="Entities\Database\VehicleNumberRange.cs" />
+    <Compile Include="Entities\Database\VehicleNumberRangeGroup.cs" />
+    <Compile Include="Entities\Database\VehiclePackList.cs" />
+    <Compile Include="Entities\Database\VehiclePackListItem.cs" />
+    <Compile Include="Entities\Database\VehicleProperty.cs" />
+    <Compile Include="Entities\Database\VehicleRentalCompany.cs" />
+    <Compile Include="Entities\Database\VehicleStickerType.cs" />
+    <Compile Include="Entities\Database\VehicleType.cs" />
+    <Compile Include="Entities\Database\VehicleTypeRequest.cs" />
+    <Compile Include="Entities\Database\VehicleTypeRequestStatu.cs" />
+    <Compile Include="Entities\Database\VehicleUseList.cs" />
+    <Compile Include="Entities\Database\Vendor.cs" />
+    <Compile Include="Entities\Database\Visit.cs" />
+    <Compile Include="Entities\Database\VisitContactNote.cs" />
+    <Compile Include="Entities\Database\VisitStatu.cs" />
+    <Compile Include="Entities\Database\Volunteer.cs" />
+    <Compile Include="Entities\Database\VolunteerCertification.cs" />
+    <Compile Include="Entities\Database\VolunteerDesignation.cs" />
+    <Compile Include="Entities\Database\VolunteerEventCheckIn.cs" />
+    <Compile Include="Entities\Database\VolunteerGroup.cs" />
+    <Compile Include="Entities\Database\VolunteerGroupAssignment.cs" />
+    <Compile Include="Entities\Database\VolunteerJob.cs" />
+    <Compile Include="Entities\Database\VolunteerJobAssignment.cs" />
+    <Compile Include="Entities\Database\VolunteerJobGroup.cs" />
+    <Compile Include="Entities\Database\VolunteerJobShift.cs" />
+    <Compile Include="Entities\Database\VolunteerMedicalLicense.cs" />
+    <Compile Include="Entities\Database\VolunteerSize.cs" />
+    <Compile Include="Entities\Database\vwPositionSearch.cs" />
+    <Compile Include="Entities\Database\vwVisit.cs" />
+    <Compile Include="Entities\Database\Weather.cs" />
+    <Compile Include="HashtUtils.cs" />
+    <Compile Include="Entities\Database\ApplicationRefreshToken.cs" />
+    <Compile Include="Entities\Database\ApplicationRole.cs" />
+    <Compile Include="Entities\Database\ApplicationUser.cs" />
+    <Compile Include="Entities\Database\UserData.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\TokenData.cs" />
+    <Compile Include="Entities\Users\UserCreateData.cs" />
+    <Compile Include="Entities\Users\UserUpdateData.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="PaginationList.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IRepositoryEmos1.cs" />
+    <Compile Include="Repositories\IRepositoryESR.cs" />
+    <Compile Include="Services\IAccountService.cs" />
+    <Compile Include="Services\ILoginService.cs" />
+    <Compile Include="Services\Emos1\IServiceBaseEmos1.cs" />
+    <Compile Include="Services\ESR\IServiceBaseESR.cs" />
+    <Compile Include="Services\IServiceBase.cs" />
+    <Compile Include="Services\ESR\IEventService.cs" />
+    <Compile Include="Services\Emos1\IClientService.cs" />
+    <Compile Include="Services\ESR\IUserPermissionService.cs" />
+    <Compile Include="Services\ESR\IUserService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

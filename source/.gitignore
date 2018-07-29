@@ -1,0 +1,26 @@
+obj
+bin
+output
+*.suo
+*.user
+*.build.csdef
+Release/
+Debug/
+logs/wiki*
+Publish/
+data/
+.vs/
+*.db
+PublishLog.txt
+connectionString.txt
+*.sl3
+PrecompiledWeb/
+packages/
+
+# Allow
+!Nuget.exe
+SystemSolution/Test/JQGrid/vwd.webinfo
+!FontReg.exe
+!PsExec.exe
+!SystemSolution/Emos1.Help.Wiki/bin/
+*.log

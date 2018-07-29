@@ -1,0 +1,52 @@
+﻿@model Emos2.MVC.Models.Viewmodels.Meetings.MeetingSaveViewmodel
+@using Emos2.MVC.Helpers
+@using Emos2.Infrastructure.EnumDeclarations
+
+@using (Ajax.BeginForm("SaveMeeting", "Meeting", null, new AjaxOptions() {HttpMethod = "post", OnSuccess = "meetingUpdateDetailsSuccess", OnBegin = "onBeginCrudActions"}, new {id = "meetingUpdateForm", @class = "form-horizontal"}))
+{
+    @Html.HiddenFor(model => model.Id)
+    @*@Html.HiddenFor(model => model.MeetingStatusId)*@
+    
+    <div class="space-vertical-small"></div>
+    <div class="row">
+        <div class="col-xs-6">
+            @Html.EditorFor(model => model.MeetingNumber, "StringReadonly")
+            @Html.EditorFor(model => model.Venue)
+            @Html.EditorFor(model => model.Date, "DatePicker")
+            @Html.EditorFor(model => model.Time, "TimePicker")
+            @Html.EditorFor(model => model.MeetingTypeId, "DropdownList", new { selectList = new SelectList(Model.MeetingTypes, "Id", "Name", Model.MeetingTypeId) })
+            @Html.EditorFor(model => model.IsCritical)
+        </div>
+        <div class="col-xs-6">
+            @Html.EditorFor(model => model.Id, "IntegerReadonly")
+            @Html.EditorFor(model => model.StatusName, "StringReadonly")
+            @Html.EditorFor(model => model.AssignToUser, "StringReadonly")
+            @Html.EditorFor(model => model.MeetingQuorumId, "DropdownList", new {selectList = new SelectList(Model.MeetingQuorums, "Id", "Name", Model.MeetingQuorumId) })
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Quorum Achieved</label>
+                <div class="col-sm-7">
+                    @Html.CheckBoxFor(model => model.IsQuorumAchieved, new {id = "meetingQuorumAchieved", disabled = "disabled"})
+                    <span class="span-checkbox"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="roundRobinCommentRichText" class="form-hidden">
+        <div class="space-vertical-small"></div>
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.EditorFor(model => model.CriticalMeetingComment, "RichTextString")
+            </div>
+        </div>
+        <div class="space-vertical-small"></div>
+    </div>
+    <div class="textfield-title">
+        <h3>Note</h3>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.EditorFor(model => model.Note, "RichTextString")
+        </div>
+    </div>
+    <div class="space-vertical"></div>
+}

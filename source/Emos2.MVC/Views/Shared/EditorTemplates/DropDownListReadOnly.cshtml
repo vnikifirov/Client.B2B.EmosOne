@@ -1,0 +1,11 @@
+﻿@model object
+
+<div class="form-group">
+    @Html.LabelFor(model => model, new { @class = "col-sm-4 control-label" })
+    <div class="col-sm-7">
+        @Html.HiddenFor(model => model)
+        @*@Html.TextBoxFor(model => ((SelectList)ViewData["selectList"]).Where(p => p.Value == Convert.ToString( model)).First().Text, new { @class = "form-control", @disabled = "disabled" })*@
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+
+    </div>
+</div>

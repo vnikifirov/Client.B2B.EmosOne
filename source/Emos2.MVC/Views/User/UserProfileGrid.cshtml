@@ -1,0 +1,90 @@
+﻿@model Emos2.MVC.Models.Grid.GridModel<UserProfileData>
+@using Emos2.Infrastructure.EnumDeclarations
+@using Emos2.Infrastructure.Entities.Users
+
+
+@{ 
+    string userid = ViewBag.accountId;
+}
+
+<div class="table-responsive">
+    <table class="table-collapse">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <span class="fa fa-angle-double-right"></span>
+                </th>
+                <th>
+                    Company Group
+
+                </th>
+                <th>
+                    Company
+                   
+                </th>
+                <th>
+                    Role
+                </th>
+                <th>
+                    Department
+                   
+                </th>
+                <th>
+                    Unit
+                </th>
+                <th>
+                    Unit Directorate
+                </th>
+                <th>
+                    Active
+                </th>
+                <th class="text-right cell-small">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var up in Model.Rows)
+                {
+                    var rolesString = "";
+                    var action = $"openUserProfile('{userid}')";
+
+                    <tr style="cursor:pointer">
+                        <td class="text-center">
+                            <a class="collapsed" href="javascript:void(0)" onclick="openUserProfile('')">
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </td>
+                        <td>@(up.CompanyHierarchy.CompanyGroupId)</td>
+                        <td>@(up.CompanyHierarchy.CompanyName)</td>
+                      
+                        <td style="max-width:300px; overflow:hidden; text-overflow:ellipsis;white-space: nowrap;" title="@(up.RoleId)">
+                            @(up.RoleId)
+                        </td>
+                        <td>@(up.CompanyHierarchy.DepartmentName) </td>
+                        <td>@(up.CompanyHierarchy.UnitName)</td>
+                        <td>@(up.CompanyHierarchy.DirectorateName)</td>
+                        <td>@(up.Active)</td>
+
+                        <td class="text-right">
+                            @if (up.Active)
+                            {
+                                <a href="javascript:void(0)" class="action-link" onclick="deactivateUserProfile(@up.ProfileId)"><span class="glyphicon glyphicon-ok green"></span></a>
+                            }
+                            else
+                            {
+                                <a href="javascript:void(0)" class="action-link" onclick="activateUserProfile(@up.ProfileId)"><span class="fa fa-times"></span></a>
+                            }
+
+                            
+                          
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@{ Html.RenderPartial("../Grid/GridsPagination", Model.PaginationModel); }
+
+

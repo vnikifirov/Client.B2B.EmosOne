@@ -1,0 +1,71 @@
+﻿@model Emos2.MVC.Models.Grid.GridModel<UserDataModel>
+@using Emos2.Infrastructure.EnumDeclarations
+@using Emos2.Infrastructure.Entities.Users
+
+<div class="table-responsive">
+    <table class="table-collapse">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <span class="fa fa-angle-double-right"></span>
+                </th>
+                <th>
+                    Full Name
+                    @{ Html.RenderPartial("../Filter/Filter", Model.FilterModel.Filters["Username"]); }
+                </th>
+                <th>
+                    Role
+                </th>
+                <th>
+                    Company
+                    @{ Html.RenderPartial("../Filter/Filter", Model.FilterModel.Filters["CompanyId"]); }
+                </th>
+                <th>
+                    Status
+                </th>
+                @*<th>
+                    Department
+                </th>*@
+                <th class="text-right cell-small">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var user in Model.Rows)
+                {
+                    var rolesString = "";
+                    var action = $"openUser('{user.AccountDataId}')";
+
+                    <tr onclick="@action" style="cursor:pointer">
+                        <td class="text-center">
+                            <a class="collapsed" href="javascript:void(0)" onclick="openUser('@user.AccountDataId')">
+                                <span class="fa fa-chevron-right"></span>
+                            </a>
+                        </td>
+                        <td>@(user.FullName)</td>
+                        @if (user.UserProfiles != null && user.UserProfiles.Any())
+                        {
+                            rolesString = string.Join(", ", user.UserProfiles.Select(r => r.RoleId).ToList());
+
+                        }
+                        <td style="max-width:300px; overflow:hidden; text-overflow:ellipsis;white-space: nowrap;" title="@(rolesString)">
+                            @(rolesString)
+                        </td>
+                        <td>@(user.CompanyName) </td>
+                        <td>@(Enum.GetName(typeof(Declares.UserStatus), user.Status))</td>
+                        @*<td>@(user.DepartmentName) </td>*@
+                        <td class="text-right">
+                            <a href="javascript:void(0)" class="action-link" onclick="openUser('@user.AccountDataId')"><span class="fa fa-pencil"></span></a>&nbsp;
+                            <a href="javascript:void(0)" class="action-link" onclick="deleteUser(event, '@user.AccountDataId')"><span class="fa fa-times"></span></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@{ Html.RenderPartial("../Grid/GridsPagination", Model.PaginationModel); }
+
+@*<script src="@Url.Content("~/Scripts/Custom/users.js")"></script>*@
+

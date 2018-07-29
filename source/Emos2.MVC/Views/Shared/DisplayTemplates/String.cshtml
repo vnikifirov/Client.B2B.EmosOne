@@ -1,0 +1,9 @@
+﻿@model String
+
+<div class="form-group">
+    @Html.LabelFor(model => model, new { @class = "col-sm-4 control-label" })
+    <div class="col-sm-7">
+        @Html.TextBoxFor(model => model, new { @class = "form-control", @readonly = "readonly" })
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+    </div>
+</div>

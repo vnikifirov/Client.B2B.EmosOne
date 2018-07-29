@@ -1,0 +1,27 @@
+﻿@model object
+
+<div class="form-group">
+
+
+    @foreach (var li in (IList<SelectListItem>)ViewData["selectList"])
+    {
+        <div class="col-sm-4">
+
+
+            <div class="radio radio-right checkbox-click-additional">
+
+                @Html.LabelFor(model => model, li.Text, new { @class = "control-label" })
+                @Html.RadioButtonFor(model => model, li.Value, (Model != null && Model.ToString() == li.Value) ? new { @checked = "checked" } : null)
+                <span class="span-radio"></span>
+
+            </div>
+        </div>
+
+
+    }
+
+
+    @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+
+
+</div>

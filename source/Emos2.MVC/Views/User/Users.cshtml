@@ -1,0 +1,72 @@
+﻿@model Emos2.MVC.Models.User.UsersModel
+@using Emos2.Infrastructure.EnumDeclarations
+@using Emos2.MVC.Helpers
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+    <div class="container-header container-header-big">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2>Search</h2>
+                <p>Search all Users</p>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-inline text-right">
+                    <div class="form-group">
+                        <div class="input-search">
+                            <input type="search" class="form-control user-search" placeholder="Search" id="userSearch" onkeypress="javascript: if (event.keyCode == 13) refreshUsersGrid()">
+                            <span class="fa fa-search js-user-search" onclick="refreshUsersGrid();"></span>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-default" type="button" onclick="clearSearchData(); refreshUsersGrid();">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-line"></div>
+    <div class="container-tiles js-selected-user-group" data-selected-group-id="">
+        @foreach (Declares.UserGroup type in Enum.GetValues(typeof(Declares.UserGroup)))
+        {
+            <a id="btnSelectUserGroup" href="javascript:void(0)" onclick="selectUserGroup('@Declares.GetRolesString(type)')">
+                <div class="tile">
+                    <div class="@Html.UserGroupTypeTileClass((int)type)">
+                        <span>@type</span>
+                    </div>
+                    <p>@Declares.GetDescription(type)</p>
+                </div>
+            </a>
+        }
+    </div>
+    <div class="row">
+        <div id="usersGrid" class="table-responsive">
+            <div class="table-title">
+                <a id="btnAddUser" href="javascript:void(0)" onclick="openUser(null)"><span class="fa fa-plus"></span></a>
+            </div>
+            <div id="userGridContainer" class="col-sm-12">
+                @{
+                    Html.RenderPartial("UsersGrid", Model.UsersGridModel);
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="details">
+                <span>
+                    <span class="fa fa-angle-double-right"></span>
+                </span> Click on arrow for more details
+            </div>
+        </div>
+    </div>
+</div>
+@*<script src="@Url.Content("~/Scripts/Custom/users.js")"></script>*@
+
+

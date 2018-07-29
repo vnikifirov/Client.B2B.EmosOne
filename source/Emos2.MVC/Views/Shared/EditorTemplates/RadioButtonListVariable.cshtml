@@ -1,0 +1,32 @@
+﻿@model object
+
+
+@foreach (var li in (IList<SelectListItem>)ViewData["selectList"])
+{
+    var size = 1;
+    if (li.Text.Count() < 15)
+    {
+        size = 2;
+    }
+
+    else if (li.Text.Count() >= 15)
+    {
+        size = 3;
+    }
+
+
+
+
+    <div class="col-sm-@size">
+
+        <div class="checkbox checkbox-right">
+            <label>
+                @li.Text
+                @Html.RadioButtonFor(model => model, li.Value, Model.ToString() == li.Value ? new { @checked = "checked" } : null)
+                <span class="span-radio"></span>
+            </label>
+        </div>
+    </div>
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+
+}

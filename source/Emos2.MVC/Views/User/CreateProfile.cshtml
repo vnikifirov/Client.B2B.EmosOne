@@ -1,0 +1,280 @@
+﻿
+@using Emos2.MVC.Helpers
+@using Emos2.Infrastructure.EnumDeclarations
+@model Emos2.MVC.Models.Viewmodels.User.SaveUserProfileViewModel
+
+@using (Ajax.BeginForm("SaveUserProfile", "User", new AjaxOptions() { HttpMethod = "post", OnSuccess = "profileSaveSuccess" }, new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "createProfileForm" }))
+{
+    @Html.HiddenFor(model => model.UserProfile.UserId)
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="container-header container-header-small">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>NEW/EDIT User Profile</h2>
+
+                    <p id="subtitleMessage">Application User Profile Details </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        
+        <fieldset>
+            <legend>PROFILE</legend>
+            <h3>Profile Information</h3>
+            <div class="row">
+              
+                <div class="col-sm-6">
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserProfile.CompanyHierarchy.CompanyGroupId, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(model => model.UserProfile.CompanyHierarchy.CompanyGroupId, new SelectList(Model.CompanyGroups, "ID", "Name"), new { ID = "ddCompanyGroupId", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.UserProfile.CompanyHierarchy.CompanyId, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @*@Html.DropDownListFor(model => model.UserProfile.CompanyHierarchy.CompanyId, new SelectList(Model.Companies, "ID", "Name"), new { ID = "ddCompanyId", @class = "form-control" })*@
+                            <select name="@Html.NameFor(model=>model.UserProfile.CompanyHierarchy.CompanyId)"
+                                    id="ddCompanyId"
+                                    class="form-control">
+                                <option value="">All</option>
+                                @foreach (var d in Model.Companies)
+                                {
+                                    <option value="@d.Id" >
+                                        @d.Name
+                                    </option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.UserProfile.CompanyHierarchy.DirectorateId, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @*@Html.DropDownListFor(model => model.UserProfile.CompanyHierarchy.DirectorateId, new SelectList(Model.Directorates, "DirectorateId", "DirectorateName",), new { ID = "ddDirectorateId", @class = "form-control" })*@
+                            <select name="@Html.NameFor(model=>model.UserProfile.CompanyHierarchy.DirectorateId)"
+                                    id="ddDirectorateId"
+                                    class="form-control">
+                                <option value="">All</option>
+                                @foreach (var d in Model.Directorates)
+                                {
+                                    <option value="@d.DirectorateId" relationId ="@d.Id">
+                                        @d.DirectorateName
+                                    </option>
+                                }
+                             
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.UserProfile.CompanyHierarchy.UnitId, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @*@Html.DropDownListFor(model => model.UserProfile.CompanyHierarchy.UnitId, new SelectList(Model.Units, "UnitId", "UnitName"), new { ID = "ddUnitId", @class = "form-control" })*@
+                            <select name="@Html.NameFor(model=>model.UserProfile.CompanyHierarchy.UnitId)"
+                                    id="ddUnitId"
+                                    class="form-control">
+                                    <option value="">All</option>
+                                    @foreach (var d in Model.Units)
+                                    {
+                                        <option value="@d.UnitId" relationId="@d.Id">
+                                            @d.UnitName
+                                        </option>
+                                    }
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.UserProfile.CompanyHierarchy.DepartmentId, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @*@Html.DropDownListFor(model => model.UserProfile.CompanyHierarchy.DepartmentId, new SelectList(Model.Departments, "DepartmentId", "DepartmentName"), new { ID = "ddDepartmentId", @class = "form-control" })*@
+                            <select name="@Html.NameFor(model=> model.UserProfile.CompanyHierarchy.DepartmentId)"
+                                    id="ddDepartmentId"
+                                    class="form-control">
+                                <option value="">All</option>
+                                @foreach (var d in Model.Departments)
+                                {
+                                    <option value="@d.DepartmentId">
+                                        @d.DepartmentName
+                                    </option>
+                                }
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.UserProfile.RoleId, new { @class = "col-sm-3 control-label" })
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(model => model.UserProfile.RoleId,  new SelectList (Model.Roles, "Id", "Name"), new { @class = "form-control", ID = "bootstrapMultiselectRoles" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="modal-footer modal-footer-center">
+        <input id="btnSaveProfile" type="button" class="btn btn-primary" onclick="saveProfilePressed();" value="Save">
+        <button type="button" class="btn btn-pdf" data-dismiss="modal">Cancel</button>
+    </div>
+
+
+    <script>
+        $(document).ready(() => {
+
+            // company group change
+            $('#ddCompanyGroupId').on('change', () => {
+                $('#ddCompanyId').html("");
+                $('#ddCompanyId').html("<option value = ''>All</option>");
+                var groupCompanyId = $("#ddCompanyGroupId").val();
+             
+                    $.ajax({
+                        method: "GET",
+                        url: "/User/GetDDLCompaniesByGroup",
+                        data: { GroupCompanyId: groupCompanyId },
+                        cache: false,
+                        async:false
+                    }).success((data) => {
+                        let appenddata = "";
+                        $.each(data, (key, value) => {
+                            appenddata += "<option value = '" + value.Id + "'>" + value.Name + " </option>";
+                        });
+
+                        $('#ddCompanyId').append(appenddata);
+
+                        $('#ddCompanyId').trigger("change");
+                        
+                        
+
+                    }).error((data) => {
+                    });
+
+            });
+
+
+            //company change
+            $('#ddCompanyId').on('change', () => {
+                $('#ddDirectorateId').html("");
+                var CompanyId = $("#ddCompanyId").val();
+
+                $('#ddDirectorateId').html("<option value = ''>All</option>");
+
+                if (CompanyId) {
+
+                    $.ajax({
+                        method: "GET",
+                        url: "/User/GetDDLDirectoratesForCompany",
+                        data: { companyId: CompanyId },
+                        cache: false,
+                        async: false
+                    }).success((data) => {
+                        let appenddata = "";
+                        $.each(data, (key, value) => {
+                            appenddata += "<option value = '" + value.DirectorateId + "' relationId = '" + value.Id + "'>" + value.DirectorateName + " </option>";
+                        });
+
+                        $('#ddDirectorateId').append(appenddata);
+
+
+                    }).error((data) => {
+                    });
+                }
+
+                $('#ddDirectorateId').trigger("change");
+
+
+            });
+
+
+            //directorate change
+
+            $('#ddDirectorateId').on('change', () => {
+                $('#ddUnitId').html("");
+                var directorateId = $("#ddDirectorateId").val();
+                var relationId = $("#ddDirectorateId option[value='" + directorateId + "']").attr("relationid");
+
+                $('#ddUnitId').html("<option value = ''>All</option>");
+
+                if (relationId) {
+
+                    $.ajax({
+                        method: "GET",
+                        url: "/User/GetDDLUnitsForDirectorate",
+                        data: { directorateId: relationId },
+                        cache: false,
+                        async: false
+                    }).success((data) => {
+
+                        let appenddata = "";
+                        $.each(data, (key, value) => {
+                            appenddata += "<option value = '" + value.UnitId + "' relationId = '" + value.Id + "'>" + value.UnitName + " </option>";
+                        });
+
+                        $('#ddUnitId').append(appenddata);
+
+                    }).error((data) => {
+                    });
+                }
+              
+
+                $('#ddUnitId').trigger("change");
+              
+
+
+            });
+
+
+            //unit change
+            $('#ddUnitId').on('change', () => {
+
+                $('#ddDepartmentId').html("");
+                var unitId = $("#ddUnitId").val();
+                var relationId = $("#ddUnitId option[value='" + unitId + "']").attr("relationid");
+
+                $('#ddDepartmentId').html("<option value = ''>All</option>");
+
+                if (relationId) {
+
+
+                    $.ajax({
+                        method: "GET",
+                        url: "/User/GetDDLDepartmentsForUnit",
+                        data: { unitId: relationId },
+                        cache: false,
+                        async: false
+            
+                    }).success((data) => {
+                        let appenddata = "";
+                        $.each(data, (key, value) => {
+                            appenddata += "<option value = '" + value.DepartmentId + "'>" + value.DepartmentName + " </option>";
+                        });
+
+                        $('#ddDepartmentId').append(appenddata);
+
+
+                    }).error((data) => {
+                    });
+                }
+
+                $('#ddDepartmentId').trigger("change");
+
+
+            });
+
+
+
+        });
+
+    </script>
+
+}
+

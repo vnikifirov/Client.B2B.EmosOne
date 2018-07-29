@@ -1,0 +1,34 @@
+﻿@model String
+@using Emos2.MVC.Helpers
+@{ 
+    string uniqueid = Guid.NewGuid().ToString();
+    string editFunctionCall = "openRichTextEditorModal('" + ViewData.TemplateInfo.HtmlFieldPrefix + "', '" + Html.DisplayNameFor(model => model) + "','" + uniqueid + "')";
+
+}
+<div class="form-group">
+    <div class="col-sm-12">
+        @Html.HiddenFor(model => model, new { @class = uniqueid })
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+
+
+        <a href="javascript:void(0)" class="edit-link" onclick="@editFunctionCall"><span class="fa fa-pencil"></span></a>
+        @{ if (ViewData["Id"] != null)
+            {
+                string id = (string)ViewData["Id"];
+                <div class="enabled-panel" onclick="@editFunctionCall" style="cursor:pointer" id="@(id)">
+                    @Html.Raw(Model)
+                </div>
+            }
+            else
+            {
+                <div class="enabled-panel" onclick="@editFunctionCall" style="cursor:pointer">
+                    @Html.Raw(Model)
+                </div>
+            }
+        }
+
+
+
+    </div>
+</div>
+

@@ -1,0 +1,25 @@
+﻿@model object
+
+    @foreach (var li in (IList<SelectListItem>)ViewData["selectList"])
+    {
+
+        <div class="checkbox checkbox-right">
+            <label disabled="disabled">
+                @li.Text
+                @if (Model.ToString() == li.Value)
+                {
+                    @Html.RadioButtonFor(model => model, li.Value, new { @checked = "checked", @disabled = "disabled" })
+                }else
+                {
+                    @Html.RadioButtonFor(model => model, li.Value, new { @disabled = "disabled" })
+                }
+                    <span class="span-radio" disabled="disabled"></span>
+            </label>
+        </div>
+        
+    }
+
+
+    @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+
+

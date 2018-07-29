@@ -1,0 +1,52 @@
+﻿@using Emos2.MVC.Helpers
+@using System.Web.Optimization
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Emos1</title>
+
+    @Styles.Render("~/Content/css-bundle")
+    @Scripts.Render("~/Scripts/plugins-bundle")
+    @Scripts.Render("~/Scripts/custom-bundle")
+    <script src="@Url.Content("~/Scripts/tinymce.min.js?v=4.4.3")"></script>
+
+
+
+    @RenderSection("scripts", required: false)
+
+</head>
+<body>
+
+
+    <div class="wrapper">
+        <header>
+            @{
+                Html.RenderPartial("_Header", new ViewDataDictionary { { "ShowUserDropdown", true } });
+                Html.RenderPartial("_Menu");
+            }
+        </header>
+
+        <main class="main-content">
+main content
+            @RenderBody()
+        </main>
+
+        <footer>
+            @{
+                Html.RenderPartial("_Footer");
+            }
+        </footer>
+    </div>
+
+    
+
+</body>
+</html>

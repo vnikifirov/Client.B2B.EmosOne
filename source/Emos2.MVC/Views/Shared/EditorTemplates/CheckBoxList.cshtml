@@ -1,0 +1,13 @@
+﻿@model TBA.MVC.Models.Shared.CheckBoxListModel
+
+    @{for (var i = 0; i < Model.Items.Count(); i++)
+        {
+            var role = Model.Items[i];
+            @Html.HiddenFor(model => model.Items[i].Id)
+            <div class='checkbox checkbox-right'>
+                @Html.LabelFor(model => model.Items[i].Name, role.Name, new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.Items[i].Selected)
+                <span class="span-checkbox"></span>
+            </div>
+        }
+    }

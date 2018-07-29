@@ -1,0 +1,16 @@
+﻿@model String
+
+@using Emos2.MVC.Helpers
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+
+
+<div class="container">
+
+    @Html.ActionLink("Get Staff test", "GetStaff")
+
+</div>

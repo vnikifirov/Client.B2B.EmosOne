@@ -1,0 +1,22 @@
+﻿@model Emos2.MVC.Models.Shared.CheckBoxListModel
+
+<div id="js-submission-types-main" class="js-types-list">
+    @for (var i = 0; i < Model.Items.Count(); i++)
+    {
+        <div class='col-sm-2'>
+            <div class='checkbox checkbox-right'>
+                <label>@Model.Items[i].Text</label>
+                <input type="checkbox" name="SelectedItems" id="SelectedItems" value="@Model.Items[i].Value"
+                    class="@string.Format("js-subtype-select js-option-{0}", Model.Items[i].Value)" 
+                    data-option="@Model.Items[i].Value" checked="@Model.Items[i].Selected" />
+                <input type="hidden" value="false">
+                <span class="span-checkbox"></span>
+            </div>
+        </div>
+    }   
+</div>
+
+<script language="javascript" type="text/javascript">
+    var subtypes = $('#js-submission-types-main');
+    subtypes.Subtype();
+</script>

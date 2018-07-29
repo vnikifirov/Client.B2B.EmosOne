@@ -1,0 +1,20 @@
+﻿@model DateTime?
+
+@{var classes = "col-sm-4 control-label";
+    if (ViewData["NoLeftPadding"] != null)
+    {
+        classes = "col-sm-4 control-label no-left-padding";
+    }
+}
+<div class="form-group">
+
+    @Html.LabelFor(model => model, new { @class = @classes })
+    <div class="col-sm-7">
+        @Html.TextBoxFor(model => model, new { @class = "form-control date", @Value = Model.HasValue ? Model.Value.ToShortDateString() : "" })
+        @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger" })
+    </div>
+    <script type="text/javascript">
+        initDatePicker('@Html.IdForModel()');
+    </script>
+</div>
+

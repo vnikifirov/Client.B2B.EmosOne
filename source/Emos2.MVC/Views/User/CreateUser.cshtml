@@ -1,0 +1,171 @@
+﻿@model Emos2.MVC.Models.Viewmodels.User.AddUserViewmodel
+@using Emos2.MVC.Helpers
+@using Emos2.Infrastructure.EnumDeclarations
+
+@using (Ajax.BeginForm("SaveUser", "User", new AjaxOptions() { HttpMethod = "post", OnSuccess = "userSaveSuccess" }, new { enctype = "multipart/form-data", @class = "form-horizontal", @id = "createUserForm" }))
+{
+    @Html.HiddenFor(model => model.User.Id)
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="container-header container-header-small">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>NEW/EDIT User</h2>
+
+                    <p id="subtitleMessage">Application User Details </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="row row-user row-user-add">
+            <div class="user-image">
+                @if (Model.User.Photo != null)
+                {
+                    <img class="round-img" src="data:image/png;base64,@Model.User.PhotoBase64" id="UserPhoto">
+                }
+                else
+                {
+                    <img class="round-img" src="~/img/no-image.png" id="UserPhoto">
+                }
+                @Html.HiddenFor(model => model.User.PhotoBase64)
+
+                <div class="upload-image">
+                    <div class="btn btn-primary upload-button">Upload image</div>
+                    <input class="upload-input" type="file" name="UserPhoto" id="fileUpload" onchange="onFileChange(files)" accept=".png,.jpg,.jpeg,.gif" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+
+
+                    @Html.LabelFor(model => Model.User.Email, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.User.Email, new { ID = "txtEmail", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <button class="btn btn-primary" type="button" onclick="verfyUser();">Verify</button>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.User.FirstName, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.User.FirstName, new { ID = "txtFirstName", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.User.LastName, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.User.LastName, new { ID = "txtLastName", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.User.MobilePhone, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.User.MobilePhone, new { ID = "txtMobilePhone", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.User.MobilePhone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.User.Designation, new { @class = "col-sm-3 control-label" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.User.Designation, new { ID = "txtDesignation", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.User.Designation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.User.Username, new { @class = "col-sm-3 control-label no-left-padding" })
+                    <div class="col-sm-8">
+                        @if (Model.IsUpdate)
+                        {
+                            @Html.TextBoxFor(model => model.User.Username, new { @class = "form-control", @readonly = "readonly" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(model => model.User.Username, new { ID = "txtUsername", @class = "form-control" })
+                        }
+                    </div>
+                    @Html.ValidationMessageFor(model => model.User.Username, "", new { ID = "", @class = "text-danger" })
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.User.MiddleName, new { ID = "txtMiddleName", @class = "col-sm-3 control-label no-left-padding" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.User.MiddleName, new { ID = "txtMiddleName", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.User.MiddleName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.User.Status, new { @class = "col-sm-3 control-label no-left-padding" })
+                    <div class="col-sm-8">
+                        @Html.DropDownListFor(model => model.User.Status, EnumHelper.GetSelectList(typeof(Declares.UserStatus)), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => Model.User.WorkPhone, new { @class = "col-sm-3 control-label no-left-padding" })
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(model => model.User.WorkPhone, new { ID = "txtWorkPhone", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.User.WorkPhone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <fieldset>
+            <legend>PROFILE</legend>
+            <h3>Profile Information</h3>
+            <div class="row">
+                <div class="table-title">
+                    <a id="btnAddUser" href="javascript:void(0)" onclick="openProfile('@Model.User.Id')"><span class="fa fa-plus"></span></a>
+                </div>
+
+                <div class="col-sm-12">
+                    <div id="userProfileGridContainer" parententityid ="@Model.User.Id">
+                        @{ if (Model.UserProfileGrid != null) { Html.RenderPartial("~/Views/User/UserProfileGrid.cshtml", Model.UserProfileGrid); } }
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+        <fieldset>
+            <legend>LOGIN</legend>
+            <h3>Login Information</h3>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="col-sm-3 control-label">Password</div>
+                        <div class="col-sm-8">
+                            @if (Model.IsUpdate)
+                            {
+                                Model.User.Password = null;
+                                Model.User.PasswordConfirmation = null;
+                              
+                            }
+                          
+                            @Html.TextBoxFor(model => model.User.Password, new { ID = "txtPassword", @class = "form-control", @type = "password" })
+                            @Html.ValidationMessageFor(model => model.User.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => Model.User.PasswordConfirmation, new { @class = "col-sm-4 control-label" })
+                        <div class="col-sm-8">
+                            @Html.TextBoxFor(model => model.User.PasswordConfirmation, new { ID = "txtPasswordConfirmation", @class = "form-control", @type = "password" })
+                            @Html.ValidationMessageFor(model => model.User.PasswordConfirmation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="modal-footer modal-footer-center">
+        <input id="btnSaveUser" type="button" class="btn btn-primary" onclick="saveUserPressed();" value="Save">
+        <button type="button" class="btn btn-pdf" data-dismiss="modal">Cancel</button>
+    </div>
+
+}
+
